@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="img/tytulowy.png" data-background-size="1200px"></section>
+				<section data-background="img/ITarystokracja.png" data-background-size="1200px"></section>
+				<section data-background="img/animacja-4s.gif" data-background-size="1200px"></section>
+				<section data-background="img/JavaScriptWAT.png" data-background-size="1200px"></section>
+
+				<section>
+					<p>manifest.json</p>
+					<pre><code data-trim data-noescape class="json">
+						// Mandatory
+						"manifest_version": 2,
+						"name": "My App",
+						"version": "1.2.3",
+
+						// Recommended
+						"default_locale": "en",
+						"description": "A plain text description",
+						"icons": {...},
+						"content_scripts": [
+						  {
+						    "matches": ["http://*/*", "https://*/*"],
+						    "js": ["jquery-3.1.1.min.js", "myscript.js"]
+						  }
+						]
+					</code></pre>
+				</section>
+
+				<section>
+					<p>Permissions</p>
+					<pre><code data-trim data-noescape class="json">
+						"permissions": [
+						  "activeTab",
+						  "tabs",     // enable chrome.tabs and chrome.windows API
+						  "http://*/*",
+						  "https://*/*",
+
+						  "clipboardWrite", // for Copy
+						  "clipboardRead",  // & Paste
+						  "cookies",
+						  "debugger",
+						  "identity",
+						  "sessions",
+						  ...
+						]
+					</code></pre>
+				</section>
+
+				<section>
+					<p>myscript.js</p>
+					<pre><code data-trim data-noescape class="javascript">
+						function start() {
+						  if (isLuxmedSite()) {
+						    var doctorNames = $(".reserveTable > ...");
+						    var favour = $(".reserveTable > ...");
+						    var doctors = collectDoctors(doctorNames, favour);
+						    addStars(doctors);
+						  }
+						}
+
+						start();
+					</code></pre>
+				</section>
+
+				<section data-background="img/okienko.png" data-background-size="1200px"></section>
+
+				<section>
+					<p>manifest.json</p>
+					<pre><code data-trim data-noescape>
+						"browser_action": {
+						  "default_icon": "icon16.png",
+						  "default_popup": "popup.html"
+						}
+					</code></pre>
+					<p>popup.html</p>
+					<pre><code data-trim data-noescape class="html">
+						&lt;!doctype html&gt;
+
+						&lt;html lang=&quot;pl-PL&quot;&gt;
+						  &lt;head&gt;...&lt;/head&gt;
+						  &lt;body&gt;
+							&lt;div id=&quot;status&quot;&gt;
+							  &lt;h1&gt;LuxLekarz&lt;/h1&gt;
+							  &lt;p&gt;Wtyczka pomaga wyszukiwać...&lt;/p&gt;
+							&lt;/div&gt;
+						  &lt;/body&gt;
+						&lt;/html&gt;
+					</code></pre>
+				</section>
+
+				<section data-background="img/ExtensionsWChrome.png" data-background-size="1200px"></section>
+				<section data-background="img/debugowanie.png" data-background-size="1200px"></section>
+				<section data-background="img/DeveloperDashboard.png" data-background-size="1200px"></section>
+				<section data-background="img/Oplata.png" data-background-size="1200px"></section>
+				<section data-background="img/UploadZIPa.png" data-background-size="1200px"></section>
+
+				<section>
+					<p>Build</p>
+					<pre><code data-trim data-noescape class="bash">
+						#!/bin/sh
+
+						zip -j -r LuxLekarz.zip src/*
+					</code></pre>
+				</section>
+
+				<section>
+					<p><a href="https://developer.chrome.com/extensions/samples">developer.chrome.com/extensions/samples</a></p>
+					<p><a href="https://github.com/orbitbot/chrome-extensions-examples">github.com/orbitbot/chrome-extensions-examples</a></p>
+					<img src="img/SamplesExtensions.png">
+				</section>
+
+				<!--<section>Session Buddy ?</section>-->
+				<section data-background="img/widegithub.png" data-background-size="1000px"></section>
+				<section data-background="img/gramarrly.jpg" data-background-size="1000px"></section>
+				<section data-background="img/gratsupsender.png" data-background-size="1000px"></section>
+				<section data-background="img/jest-moc.png" data-background-size="1000px"></section>
+				<section data-background="img/tytulowy.png" data-background-size="1200px"></section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                controls: false,
+                progress: true,
+                history: true,
+                center: true,
+                autoSlide: 20000,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				dependencies: [
+                    // { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    // { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
